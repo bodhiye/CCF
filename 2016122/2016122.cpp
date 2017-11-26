@@ -1,42 +1,24 @@
-#include<iostream>
-inline bool is_true(int &x, int &y) {
-	int c = y - 3500;
-	int c1 = y - x;
-	int sum;
-	if (c >= 80000)
-		sum = (c - 80000)*0.45 + 22495;
-	else if (c >= 55000)
-		sum = (c - 55000)*0.35 + 13745;
-	else if (c >= 35000)
-		sum = (c - 35000)*0.30 + 7745;
-	else if (c >= 9000)
-		sum = (c - 9000)*0.25 + 1245;
-	else if (c >= 4500)
-		sum = (c - 4500)*0.20 + 345;
-	else if (c >= 1500)
-		sum = (c - 1500) *0.10 + 45;
-	else sum = c*0.03;
-	if (sum == c1)
-	{
-		return true;
-	}
-	else
-		return false;
-}
-using  namespace std;
-int main() {
+#include <iostream>
+
+using namespace std;
+
+int s[] = { 3500,5000,8000,12500,38500,58500,83500 };
+int t[] = { 0,45,345,1245,7745,13745,22495 };
+float rate[] = { 0.03,0.1,0.2,0.25,0.3,0.35,0.45 };
+
+int main()
+{
 	std::ios::sync_with_stdio(false);
-	int T, a, num, S;
+	int T, i, S;
 	cin >> T;
-	if (T <= 3500)
-		S = T;
-	else {
-		a = T / 100 + 1;
-		do {
-			S = 100 * a;
-			++a;
-		} while (!is_true(T, S));
+	for (i = 6; i >= 0; i--)
+	{
+		if (T > s[i] - t[i])
+		{
+			break;
+		}
 	}
+	S = s[i] + (T - s[i] + t[i]) / (1 - rate[i]);
 	cout << S << endl;
 	return 0;
 }
